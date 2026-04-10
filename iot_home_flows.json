@@ -1,0 +1,777 @@
+[
+    {
+        "id": "1e70f74f0c0cefdf",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "186c13375cde7fd9",
+        "type": "mqtt in",
+        "z": "1e70f74f0c0cefdf",
+        "name": "",
+        "topic": "esp32/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "5fd463f717c41a24",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "bf44ab3f37a62f48"
+            ]
+        ]
+    },
+    {
+        "id": "6e9a0af2d16e6393",
+        "type": "ui_gauge",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Nhiệt độ",
+        "group": "84c73f06dec4b661",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Nhiệt độ (°C)",
+        "label": "",
+        "format": "{{value}} °C",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "20",
+        "seg2": "35",
+        "diff": false,
+        "className": "",
+        "x": 780,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "982c7bc9b585090e",
+        "type": "ui_chart",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Hiển thị nhiệt độ",
+        "group": "84c73f06dec4b661",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Biểu đồ nhiệt độ",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "50",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 800,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9e481edfbc9db705",
+        "type": "ui_chart",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Biểu đồ độ ẩm",
+        "group": "1c508a3dad7cb468",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Biểu đồ độ ẩm (%)",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 720,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "153134e43045644f",
+        "type": "mqtt in",
+        "z": "1e70f74f0c0cefdf",
+        "name": "",
+        "topic": "esp32/humidity",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "5fd463f717c41a24",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "2698234c1ff3cadf"
+            ]
+        ]
+    },
+    {
+        "id": "0b6a2be73077b86a",
+        "type": "ui_gauge",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Độ ẩm (%)",
+        "group": "1c508a3dad7cb468",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Độ ẩm",
+        "label": "",
+        "format": "{{value}} %",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "40",
+        "seg2": "70",
+        "diff": false,
+        "className": "",
+        "x": 710,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "bf44ab3f37a62f48",
+        "type": "function",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Xử lý nhiệt độ",
+        "func": "msg.payload = parseFloat(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "6e9a0af2d16e6393",
+                "b2c9534f9e06e7cf",
+                "982c7bc9b585090e",
+                "b07ccf59e36b3843",
+                "f5fc6aa0c074a8e2"
+            ]
+        ]
+    },
+    {
+        "id": "2698234c1ff3cadf",
+        "type": "function",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Xử lý độ ẩm",
+        "func": "msg.payload = parseFloat(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 460,
+        "wires": [
+            [
+                "0b6a2be73077b86a",
+                "9e481edfbc9db705",
+                "2c3c65609102d62b",
+                "c6d3e90cc5cee17e",
+                "cce78f3b85dc4c09"
+            ]
+        ]
+    },
+    {
+        "id": "351e7cbd6038f0df",
+        "type": "mqtt out",
+        "z": "1e70f74f0c0cefdf",
+        "name": "",
+        "topic": "esp32/led",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5fd463f717c41a24",
+        "x": 480,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "56db32e115b01d59",
+        "type": "ui_switch",
+        "z": "1e70f74f0c0cefdf",
+        "name": "ĐIỀU KHIỂN LED",
+        "label": "Điều khiển LED (OFF/ON)",
+        "tooltip": "",
+        "group": "84c73f06dec4b661",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "ON",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "OFF",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "351e7cbd6038f0df"
+            ]
+        ]
+    },
+    {
+        "id": "b2c9534f9e06e7cf",
+        "type": "ui_text",
+        "z": "1e70f74f0c0cefdf",
+        "group": "84c73f06dec4b661",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Trạng thái",
+        "format": "🌡️ Nhiệt độ: {{msg.payload}} °C",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 780,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "2c3c65609102d62b",
+        "type": "ui_text",
+        "z": "1e70f74f0c0cefdf",
+        "group": "1c508a3dad7cb468",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Trạng thái",
+        "format": "Độ ẩm: {{msg.payload}} %",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 700,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b07ccf59e36b3843",
+        "type": "function",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Cảnh báo nhiệt độ",
+        "func": "let temp = msg.payload;\n\nif (temp > 30) {\n    msg.payload = \"🔥 Nhiệt độ cao! (\" + temp + \"°C)\";\n    return msg;\n}\nelse if (temp < 20) {\n    msg.payload = \"❄️ Nhiệt độ thấp! (\" + temp + \"°C)\";\n    return msg;\n}\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 180,
+        "wires": [
+            [
+                "8989d3791d6555f8"
+            ]
+        ]
+    },
+    {
+        "id": "8989d3791d6555f8",
+        "type": "ui_toast",
+        "z": "1e70f74f0c0cefdf",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Thông báo nhiệt độ",
+        "x": 950,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c6d3e90cc5cee17e",
+        "type": "function",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Cảnh báo độ ẩm",
+        "func": "if (msg.payload < 30) {\n    msg.payload = \"💧 Độ ẩm thấp!\";\n    return msg;\n}\nelse if (msg.payload > 80) {\n    msg.payload = \"🌊 Độ ẩm cao!\";\n    return msg;\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 500,
+        "wires": [
+            [
+                "36560cc55b5c5005"
+            ]
+        ]
+    },
+    {
+        "id": "36560cc55b5c5005",
+        "type": "ui_toast",
+        "z": "1e70f74f0c0cefdf",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Thông báo độ ẩm",
+        "x": 910,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8e98e86c8be028d3",
+        "type": "inject",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Giả lập độ ẩm cao",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "80",
+        "payloadType": "num",
+        "x": 150,
+        "y": 540,
+        "wires": [
+            [
+                "2698234c1ff3cadf"
+            ]
+        ]
+    },
+    {
+        "id": "337e0c9eb5aab2fd",
+        "type": "inject",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Giả lập độ ẩm thấp",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "20",
+        "payloadType": "num",
+        "x": 150,
+        "y": 480,
+        "wires": [
+            [
+                "2698234c1ff3cadf"
+            ]
+        ]
+    },
+    {
+        "id": "f0759080a386bc76",
+        "type": "inject",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Giả lập nhiệt độ trên 35°C",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "37",
+        "payloadType": "num",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "bf44ab3f37a62f48"
+            ]
+        ]
+    },
+    {
+        "id": "0f368ea9dd135890",
+        "type": "inject",
+        "z": "1e70f74f0c0cefdf",
+        "name": "Giả lập nhiệt độ dưới 20°C",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "15",
+        "payloadType": "num",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "bf44ab3f37a62f48"
+            ]
+        ]
+    },
+    {
+        "id": "a90823682a5eee34",
+        "type": "function",
+        "z": "1e70f74f0c0cefdf",
+        "name": "function 1",
+        "func": "msg.payload = \"🔥 Cảnh báo! Nhiệt độ cao: \" + msg.payload + \"°C\";\nmsg.url = \"https://api.telegram.org/bot8784546508:AAGncN_BOtYqCG57Pzw6IBTsDpPxAd28dWY/sendMessage?chat_id=8779778585&text=\" + msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 240,
+        "wires": [
+            [
+                "9805f4ef7fa25daf"
+            ]
+        ]
+    },
+    {
+        "id": "9805f4ef7fa25daf",
+        "type": "http request",
+        "z": "1e70f74f0c0cefdf",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 990,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f5fc6aa0c074a8e2",
+        "type": "switch",
+        "z": "1e70f74f0c0cefdf",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "35",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "20",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 240,
+        "wires": [
+            [
+                "a90823682a5eee34"
+            ],
+            [
+                "8acf596d194bb907"
+            ]
+        ]
+    },
+    {
+        "id": "8acf596d194bb907",
+        "type": "function",
+        "z": "1e70f74f0c0cefdf",
+        "name": "function 2",
+        "func": "msg.payload = \" Cảnh báo! Nhiệt độ thấp: \" + msg.payload + \"°C\";\nmsg.url = \"https://api.telegram.org/bot8784546508:AAGncN_BOtYqCG57Pzw6IBTsDpPxAd28dWY/sendMessage?chat_id=8779778585&text=\" + msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 280,
+        "wires": [
+            [
+                "9805f4ef7fa25daf"
+            ]
+        ]
+    },
+    {
+        "id": "cce78f3b85dc4c09",
+        "type": "switch",
+        "z": "1e70f74f0c0cefdf",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "40",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "70",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 580,
+        "wires": [
+            [
+                "6199f6c96ed1c7a5"
+            ],
+            [
+                "0fb3296ca831246b"
+            ]
+        ]
+    },
+    {
+        "id": "6199f6c96ed1c7a5",
+        "type": "function",
+        "z": "1e70f74f0c0cefdf",
+        "name": "function 3",
+        "func": "msg.payload = \" Cảnh báo! 💧 Độ ẩm thấp! \" + msg.payload + \"%\";\nmsg.url = \"https://api.telegram.org/bot8784546508:AAGncN_BOtYqCG57Pzw6IBTsDpPxAd28dWY/sendMessage?chat_id=8779778585&text=\" + msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 560,
+        "wires": [
+            [
+                "dfad761350ad9e9c"
+            ]
+        ]
+    },
+    {
+        "id": "0fb3296ca831246b",
+        "type": "function",
+        "z": "1e70f74f0c0cefdf",
+        "name": "function 4",
+        "func": "msg.payload = \" 🌊 Độ ẩm cao! \" + msg.payload + \"%\";\nmsg.url = \"https://api.telegram.org/bot8784546508:AAGncN_BOtYqCG57Pzw6IBTsDpPxAd28dWY/sendMessage?chat_id=8779778585&text=\" + msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 620,
+        "wires": [
+            [
+                "dfad761350ad9e9c"
+            ]
+        ]
+    },
+    {
+        "id": "dfad761350ad9e9c",
+        "type": "http request",
+        "z": "1e70f74f0c0cefdf",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1070,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5fd463f717c41a24",
+        "type": "mqtt-broker",
+        "name": "HiveMQ",
+        "broker": "a59f8c8028934b1d812cc62e6a2ce31b.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "84c73f06dec4b661",
+        "type": "ui_group",
+        "name": "Nhiệt độ",
+        "tab": "7c5bb1e0bbd1d62b",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1c508a3dad7cb468",
+        "type": "ui_group",
+        "name": "Độ ẩm",
+        "tab": "7c5bb1e0bbd1d62b",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7c5bb1e0bbd1d62b",
+        "type": "ui_tab",
+        "name": "Trang chủ",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "9bfa3f1899f9a62b",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
